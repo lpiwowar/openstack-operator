@@ -7865,6 +7865,21 @@ spec:
                     - secret
                     type: object
                 type: object
+              lightspeed:
+                properties:
+                  enabled:
+                    default: false
+                    type: boolean
+                  llm_credentials:
+                    type: string
+                  llm_endpoint:
+                    type: string
+                  url:
+                    type: string
+                required:
+                - llm_credentials
+                - llm_endpoint
+                type: object
               manila:
                 properties:
                   apiOverride:

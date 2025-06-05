@@ -21,6 +21,9 @@ import (
 
 // OpenStackControlPlane Condition Types used by API objects.
 const (
+	// OpenStackControlPlaneLightSpeedReadyCondition condition which indicates if RabbitMQ is configured and operational
+	OpenStackControlPlaneLightSpeedReadyCondition condition.Type = "OpenStackControlPlaneLightSpeedReady"
+
 	// OpenStackControlPlaneRabbitMQReadyCondition Status=True condition which indicates if RabbitMQ is configured and operational
 	OpenStackControlPlaneRabbitMQReadyCondition condition.Type = "OpenStackControlPlaneRabbitMQReady"
 
@@ -159,6 +162,9 @@ const (
 
 	// OpenStackControlPlaneReadyErrorMessage
 	OpenStackControlPlaneReadyErrorMessage = "OpenStackControlPlane error occured %s"
+
+	// OpenStackControlPlaneLightSpeedMessage
+	OpenStackControlPlaneLightSpeedMessage = "OpenStackControlPlane LightSpeed not started"
 
 	// OpenStackControlPlaneRabbitMQReadyInitMessage
 	OpenStackControlPlaneRabbitMQReadyInitMessage = "OpenStackControlPlane RabbitMQ not started"

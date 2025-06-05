@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/name: deployment
+    app.kubernetes.io/part-of: lightspeed-operator
+  name: lightspeed-operator-controller-manager
+  namespace: openstack
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lightspeed-cluster-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: lightspeed-operator
+        app.kubernetes.io/name: lightspeed-cluster-operator
+        app.kubernetes.io/part-of: lightspeed
+    spec:
+      containers:
+        - args:
+            - --leader-elect
+            - --health-probe-bind-address=:8081
+            - --metrics-bind-address=:8443
+            - --secure-metrics-server
+            - --cert-dir=/etc/tls/private
+            - --service-image=IMG-1
+            - --console-image=IMG-2
+            - --postgres-image=IMG-3
+          command:
+            - /manager
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: OPERATOR_CONDITION_NAME
+              value: lightspeed-operator.v0.3.5
+          image: IMG
+          imagePullPolicy: Always
+          name: manager
+          ports:
+            - containerPort: 8443
+              name: metrics
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: lightspeed-operator-controller-manager
+      terminationGracePeriodSeconds: 10

@@ -123,6 +123,11 @@ type OpenStackControlPlaneSpec struct {
 
 	// +kubebuilder:validation:Optional
 	// +operator-sdk:csv:customresourcedefinitions:type=spec
+	// Galera - Parameters related to the Galera services
+	LightSpeed LightSpeedSection `json:"lightspeed,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// +operator-sdk:csv:customresourcedefinitions:type=spec
 	// Rabbitmq - Parameters related to the Rabbitmq service
 	Rabbitmq RabbitmqSection `json:"rabbitmq,omitempty"`
 
@@ -458,6 +463,27 @@ type CinderSection struct {
 	// Convenient to avoid podname (and thus hostname) collision between different deployments.
 	// Useful for CI jobs as well as preproduction and production environments that use the same storage backend, etc.
 	UniquePodNames bool `json:"uniquePodNames"`
+}
+
+// LightSpeedSection configures LightSpeed for OpenStack
+type LightSpeedSection struct {
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default=false
+	// +operator-sdk:csv:customresourcedefinitions:type=spec,xDescriptors={"urn:alm:descriptor:com.tectonic.ui:booleanSwitch"}
+	// Enabled - Whether Galera services should be deployed and managed
+	Enabled bool `json:"enabled"`
+
+	// +kubebuilder:validation:Required
+	// URL pointing to the LLM
+	LLMEndpoint string `json:"llm_endpoint"`
+
+	// +kubebuilder:validation:Required
+	// Credentials for the LLM API endpoint
+	LLMCredentials string `json:"llm_credentials"`
+
+	// +kubebuilder:validation:Required
+	// Credentials for the LLM API endpoint
+	TLSCert string `json:"tlsCert"`
 }
 
 // GaleraSection defines the desired state of Galera services

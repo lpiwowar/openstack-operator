@@ -497,6 +497,7 @@ func (r *OpenStackReconciler) renderAndApply(
 ) error {
 	var err error
 
+	//bindir := util.GetEnvVar("BASE_BINDATA", "/home/stack/lpiwowar/openstack-operator/bindata")
 	bindir := util.GetEnvVar("BASE_BINDATA", "/bindata")
 
 	sourceFullDirectory := filepath.Join(bindir, sourceDirectory)
