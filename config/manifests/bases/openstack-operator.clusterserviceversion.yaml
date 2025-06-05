@@ -223,6 +223,14 @@ spec:
       - description: Template - Overrides to use when creating the Keystone service
         displayName: Template
         path: keystone.template
+      - description: Galera - Parameters related to the Galera services
+        displayName: Light Speed
+        path: lightspeed
+      - description: Enabled - Whether Galera services should be deployed and managed
+        displayName: Enabled
+        path: lightspeed.enabled
+        x-descriptors:
+        - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
       - description: Manila - Parameters related to the Manila service
         displayName: Manila
         path: manila

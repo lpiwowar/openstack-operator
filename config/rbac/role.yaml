@@ -88,6 +88,18 @@ rules:
   - update
   - watch
 - apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - barbican.openstack.org
   resources:
   - barbicans
@@ -660,6 +672,26 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - ols.openshift.io
+  resources:
+  - olsconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ols.openshift.io
+  resources:
+  - olsconfigs/status
+  verbs:
+  - get
+  - patch
+  - update
 - apiGroups:
   - operator.openshift.io
   resources:
